@@ -1,5 +1,4 @@
 # MULE Fall 2022
 
-content coming soon...
-
-- Our first pull attempt
+Contents:
+- Score and SuperCollider file for [Dubious Toppings](https://youtu.be/2wzM0Wnw3O0)
