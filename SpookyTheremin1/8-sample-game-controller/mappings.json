@@ -93,5 +93,19 @@
 			"down" : 7,
             "left" : 6
 		}
-	}
+	},
+  "Gravis" : {
+    "dpad" : {
+      "up" : 59,
+      "right" : 60,
+      "down" : 57,
+      "left" : 58
+    },
+    "face" : 		{
+      "up" : 55,
+      "right" : 52,
+      "down" : 51,
+      "left" : 54
+    }
+  }
 }
