@@ -1,0 +1,46 @@
+/*
+ * Based on version from http://wizardswhinings.blogspot.com/2008/03/how-to-use-wii-guitar-hero-iii-guitar.html
+ *
+ * Modified by Neil Munday, July 2008
+ */
+          
+Key.Ctrl = False
+Key.LeftShift = False
+Key.LeftAlt = False
+Key.RightAlt = False
+
+debug = 'whammy=' + wiimote.Guitar.WhammyBar + ', pitch=' + RemoveUnits(Wiimote.Pitch)
+
+//change these to your liking (use debug info)
+var.whammythreshold = 0.55
+var.starpowerangle = 60
+
+Keyboard.A = Wiimote.Guitar.Fret1
+Keyboard.S = Wiimote.Guitar.Fret2
+Keyboard.J = Wiimote.Guitar.Fret3
+Keyboard.K = Wiimote.Guitar.Fret4
+Keyboard.L = Wiimote.Guitar.Fret5
+//make the 4 wiimote leds light up with the first 4 frets
+/* Wiimote.Led1 = Wiimote.Guitar.Fret1
+Wiimote.Led2 = Wiimote.Guitar.Fret2
+Wiimote.Led3 = Wiimote.Guitar.Fret3
+Wiimote.Led4 = Wiimote.Guitar.Fret4 */
+Wiimote.Led1 = True
+//other mappings
+Keyboard.Space = Wiimote.Guitar.Minus
+Keyboard.Up = Wiimote.Guitar.StrumUp
+Keyboard.Down = Wiimote.Guitar.StrumDown
+Keyboard.Return = Wiimote.Guitar.Plus
+
+//make whammy when whammy is pushed
+If Wiimote.Guitar.WhammyBar > var.whammythreshold
+   Mouse.WheelUp = Wiimote1.Guitar.WhammyBar
+EndIf
+//push star power button when guitar is tilted
+If RemoveUnits(Wiimote.Pitch) > var.starpowerangle
+   Key.Space = True
+   Wiimote.Rumble = False
+   Wait 1000 ms
+   Key.Space = False
+   Wiimote.Rumble = False
+EndIf

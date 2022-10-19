@@ -1,0 +1,72 @@
+(0, 12-Oct-2022 16:48:32) Initializing PieLog
+(0, 12-Oct-2022 16:48:32) Initializing filemode variable
+(0, 12-Oct-2022 16:48:32) Initializing PiePie
+(0, 12-Oct-2022 16:48:32) Initializing PieVariables
+(0, 12-Oct-2022 16:48:32) Initializing PieExpression
+(0, 12-Oct-2022 16:48:32) Initializing PieSpeech
+(0, 12-Oct-2022 16:48:32) Initializing PieCursorUnit
+(0, 12-Oct-2022 16:48:32) Initializing PieMouse
+(0, 12-Oct-2022 16:48:32) Initializing PieKeyboard
+(0, 12-Oct-2022 16:48:33) Initializing PieInput
+(0, 12-Oct-2022 16:48:33) Initializing PieOSC
+(0, 12-Oct-2022 16:48:33) Initializing PieFunction
+(0, 12-Oct-2022 16:48:33) Initializing PieStatement
+(0, 12-Oct-2022 16:48:33) Initializing PieP5
+(0, 12-Oct-2022 16:48:33) Initializing PiePPJoy
+(0, 12-Oct-2022 16:48:33) Initializing PieMidi
+(0, 12-Oct-2022 16:48:33) Initializing PieRemote
+(0, 12-Oct-2022 16:48:33) Initializing Pie Speech Recognition
+(0, 12-Oct-2022 16:48:33) Initializing PieScreen
+(0, 12-Oct-2022 16:48:33) GetMonitorEDID
+(0, 12-Oct-2022 16:48:33) Initializing PieWIndow
+(0, 12-Oct-2022 16:48:33) Initializing PieCursors
+(0, 12-Oct-2022 16:48:33) Initializing PieZ800
+(0, 12-Oct-2022 16:48:33) Initializing PieFiveDT
+(0, 12-Oct-2022 16:48:33) Initializing PieIntersense
+(0, 12-Oct-2022 16:48:33) Initializing PieBird
+(0, 12-Oct-2022 16:48:33) Initializing PieFastrak
+(0, 12-Oct-2022 16:48:33) Initializing PiePPT
+(0, 12-Oct-2022 16:48:33) Initializing PieTrackIR
+(0, 12-Oct-2022 16:48:33) Initializing PiePinch
+(0, 12-Oct-2022 16:48:33) Initializing PieJoystick
+(0, 12-Oct-2022 16:48:33) Starting main
+(0, 12-Oct-2022 16:48:33) Application object initialized
+(0, 12-Oct-2022 16:48:33) Creating main window
+(0, 12-Oct-2022 16:48:33) EditorForm.Create
+(0, 12-Oct-2022 16:48:33) Checking command line parameters:
+(0, 12-Oct-2022 16:48:33)   C:\Users\espen\Downloads\Emulators GBA + NDS\GlovePIE030\WiimoteScripts\WiimoteTrackIRLaptop.PIE
+(0, 12-Oct-2022 16:48:33) ClearMidiGui
+(0, 12-Oct-2022 16:48:33) Assigning exception handler
+(0, 12-Oct-2022 16:48:33) Creating debug remote control window
+(0, 12-Oct-2022 16:48:33) Running application
+(0, 12-Oct-2022 16:48:40) FormCloseQuery
+(0, 12-Oct-2022 16:48:40) Compile>Stop
+(0, 12-Oct-2022 16:48:40) Application finished
+(0, 12-Oct-2022 16:48:40) Destroying EditorForm
+(0, 12-Oct-2022 16:48:40) Finalizing PieJoystick
+(0, 12-Oct-2022 16:48:40) Finalizing PiePinch
+(0, 12-Oct-2022 16:48:40) Finalizing PieTrackIR
+(0, 12-Oct-2022 16:48:40) Finalizing PiePPT
+(0, 12-Oct-2022 16:48:40) Finalizing PieFastrak
+(0, 12-Oct-2022 16:48:40) Finalizing PieBird
+(0, 12-Oct-2022 16:48:40) Finalizing PieIntersense
+(0, 12-Oct-2022 16:48:40) Finalizing PieFiveDT
+(0, 12-Oct-2022 16:48:40) Finalizing PieZ800
+(0, 12-Oct-2022 16:48:40) Finalizing PieCursors
+(0, 12-Oct-2022 16:48:40) Finalizing PieWindow
+(0, 12-Oct-2022 16:48:40) Finalizing PieScreen
+(0, 12-Oct-2022 16:48:40) Finalizing Pie Speech Recognition
+(0, 12-Oct-2022 16:48:40) Finalizing PieRemote
+(0, 12-Oct-2022 16:48:40) Finalizing PieMidi
+(0, 12-Oct-2022 16:48:40) Finalizing PiePPJoy
+(0, 12-Oct-2022 16:48:40) Finalizing PieP5
+(0, 12-Oct-2022 16:48:40) Finalizing PieStatement
+(0, 12-Oct-2022 16:48:40) Finalizing PieFunction
+(0, 12-Oct-2022 16:48:40) Finalizing PieOSC
+(0, 12-Oct-2022 16:48:40) Finalizing PieKeyboard
+(0, 12-Oct-2022 16:48:40) Finalizing PieMouse
+(0, 12-Oct-2022 16:48:40) Finalizing PieSpeech
+(0, 12-Oct-2022 16:48:40) Finalizing PieVariables
+(0, 12-Oct-2022 16:48:40) Finalizing PiePie
+(0, 12-Oct-2022 16:48:40) Finalizing PieLog
+(0, 12-Oct-2022 16:48:40) Closing log file
