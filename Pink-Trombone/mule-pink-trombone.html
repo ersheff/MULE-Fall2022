@@ -100,8 +100,8 @@ var tractCtx = tractCanvas.getContext("2d");
 var sampleRate;
 var time = 0;
 var temp = {a:0, b:0};
-var alwaysVoice = true;
-var autoWobble = true;
+var alwaysVoice = false;
+var autoWobble = false;
 var noiseFreq = 500;
 var noiseQ = 0.7;
 var palePink = "#FFEEF5";
@@ -112,7 +112,7 @@ if (browser.indexOf('firefox') > -1) isFirefox = true;
 var gain_amount = 0.5;
 var delay_time_amount = 0.1;
 
-var distortion = true;
+var distortion = false;
     
 var UI = 
 { 
@@ -131,12 +131,12 @@ var UI =
         this.mouseDown = false;
         
         this.aboutButton = makeButton(460, 392, 140, 30, "about...", true);         
-        this.alwaysVoiceButton = makeButton(460, 428, 140, 30, "always voice", true);
-        this.distortionButton = makeButton (300, 428, 140, 30, "distiortion", true);
-        this.delayButton = makeButton(300, 395, 140, 30, "delay", true);
+        this.alwaysVoiceButton = makeButton(460, 428, 140, 30, "always voice", false);
+        this.distortionButton = makeButton (300, 428, 140, 30, "distortion", false);
+        this.delayButton = makeButton(300, 395, 140, 30, "delay", false);
         this.gainMeter = makeMeter(460, 270, 10, 100, gain_amount);
         this.delayTimeMeter = makeMeter(490, 270, 10, 100, delay_time_amount);
-        this.autoWobbleButton = makeButton(460, 464, 140, 30, "pitch wobble", true); 
+        this.autoWobbleButton = makeButton(460, 464, 140, 30, "pitch wobble", false); 
 
         tractCanvas.addEventListener('touchstart', UI.startTouches);
         tractCanvas.addEventListener('touchmove', UI.moveTouches);
