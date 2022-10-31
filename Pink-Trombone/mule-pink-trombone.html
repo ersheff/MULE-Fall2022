@@ -62,6 +62,9 @@ style = "position: absolute; z-index: 1;  background-color:transparent; margin: 
 <canvas id="backCanvas" width="600" height="600" 
 style = "position: absolute; z-index: 0; background-color:transparent; margin: 0; padding: 0;">
 </canvas>
+<canvas id="extraNotches" width="600" height="600"
+style = "position: relative; right: 300px; z-index: 0; background-color:transparent; margin: 0; padding: 0;">
+</canvas>
 
 
 <script>
@@ -96,12 +99,14 @@ var backCanvas = document.getElementById("backCanvas");
 var backCtx = backCanvas.getContext("2d");
 var tractCanvas = document.getElementById("tractCanvas");
 var tractCtx = tractCanvas.getContext("2d");
+var notchesCanvas = document.getElementById("extraNotches");
+var notchesCtx = notchesCanvas.getContext("2d");
 
 var sampleRate;
 var time = 0;
 var temp = {a:0, b:0};
 var alwaysVoice = false;
-var autoWobble = false;
+var autoWobble = true;
 var noiseFreq = 500;
 var noiseQ = 0.7;
 var palePink = "#FFEEF5";
@@ -113,6 +118,17 @@ var gain_amount = 0.5;
 var delay_time_amount = 0.1;
 
 var distortion = false;
+    
+var current_transpose = 60 - 12 - 7;
+    
+// This is the worst code I've ever written, but I don't have the time to make it pretty.
+// Could call this function current trans trans but that would be too confusing.
+current_transpose_translate = function(interval) {
+    current_transpose += interval;
+    Glottis.UIFrequency *= Math.pow(2.0, interval / 12.0);
+};
+    
+var controller = null;    
     
 var UI = 
 { 
@@ -132,11 +148,11 @@ var UI =
         
         this.aboutButton = makeButton(460, 392, 140, 30, "about...", true);         
         this.alwaysVoiceButton = makeButton(460, 428, 140, 30, "always voice", false);
-        this.distortionButton = makeButton (300, 428, 140, 30, "distortion", false);
+        this.distortionButton = makeButton (300, 428, 140, 30, "distiortion", false);
         this.delayButton = makeButton(300, 395, 140, 30, "delay", false);
-        this.gainMeter = makeMeter(460, 270, 10, 100, gain_amount);
-        this.delayTimeMeter = makeMeter(490, 270, 10, 100, delay_time_amount);
-        this.autoWobbleButton = makeButton(460, 464, 140, 30, "pitch wobble", false); 
+        this.gainMeter = makeMeter(460, 270, 10, 100, gain_amount, 0.0, 1.0);
+        this.delayTimeMeter = makeMeter(490, 270, 10, 100, delay_time_amount, 0.0, max_delay);
+        this.autoWobbleButton = makeButton(460, 464, 140, 30, "pitch wobble", true); 
 
         tractCanvas.addEventListener('touchstart', UI.startTouches);
         tractCanvas.addEventListener('touchmove', UI.moveTouches);
@@ -149,32 +165,78 @@ var UI =
             {UI.mouseDown = true; event.preventDefault(); UI.startMouse(event);}));
         document.addEventListener('mouseup', (function(event)
             {UI.mouseDown = false; UI.endMouse(event);}));
-        document.addEventListener('mousemove', UI.moveMouse);      
+        document.addEventListener('mousemove', UI.moveMouse); 
+        
+        document.addEventListener('gamepadconnected', (function(event) { console.log(event.gamepad.id) }));
         
         document.addEventListener('keydown', UI.keyPressed);
         document.addEventListener('keyup', UI.keyReleased);
+        
+        
+        setInterval(this.scanGamepads, 500);
     
+    },
+    
+    scanGamepads : function() {
+        controller = navigator.getGamepads()[0];
     },
     
     keyPressed : function(event) {
         id = event.keyCode-48;
-        if (event.keyCode == 219)
+        if (event.code == "Minus")
             id = 11;
-        if (event.keyCode == 221) 
+        if (event.code == "Equal") 
             id = 12;
-        if (event.keyCode == 191)
+        if (event.code == "BracketLeft")
             id = 13; 
         if (id == 0)
             id = 10;
         
+        if (event.code == "KeyA") {
+            TractUI.move_tongue(200, 370);
+        }
+        if (event.code == "KeyI") {
+            TractUI.move_tongue(280, 270);    
+        }
+        
+        if (event.code == "KeyQ") {
+            current_transpose_translate(+1);
+        } if (event.code == "KeyW") {
+            current_transpose_translate(-1);
+        }
+        if (event.code == "KeyE") {
+            current_transpose_translate(+12);
+        } if (event.code == "KeyR") {
+            current_transpose_translate(-12);
+        }
+        
+        
+        
+        if (event.code == "KeyO") {
+            UI.alwaysVoiceButton.toggle();
+            alwaysVoice = UI.alwaysVoiceButton.switchedOn;
+            
+        }
+        
         if(id >= 1 && id <= 13) {
-            Glottis.UIFrequency = 440.0 * Math.pow(2.0, (id - 1) / 12.0);
+            Glottis.UIFrequency = (261.63) * Math.pow(2.0, (current_transpose - 60 + id - 1) / 12.0);
             Glottis.isTouched = true;
         }
     },
     
     keyReleased : function(event) {
-        Glottis.isTouched = false;
+        id = event.keyCode-48;
+        if (event.code == "Minus")
+            id = 11;
+        if (event.code == "Equal") 
+            id = 12;
+        if (event.code == "BracketLeft")
+            id = 13; 
+        if (id == 0)
+            id = 10;
+        if(id >= 1 && id <= 13) {
+                Glottis.isTouched = false;
+        }
         
     },
     
@@ -199,6 +261,43 @@ var UI =
         tractCtx.rotate(-Math.PI / 2.0);
         tractCtx.fillText("delay time", 0, 0);
         tractCtx.restore();
+        
+        var octave = Math.floor(current_transpose / 12 - 1);
+        
+        var note_name = "";
+        
+        var m = current_transpose % 12;
+        
+        if (m == 0) note_name = "C";
+        if (m == 1) note_name = "C#";
+        if (m == 2) note_name = "D";
+        if (m == 3) note_name = "D#";
+        if (m == 4) note_name = "E";
+        if (m == 5) note_name = "F";
+        if (m == 6) note_name = "F#";
+        if (m == 7) note_name = "G";
+        if (m == 8) note_name = "G#";
+        if (m == 9) note_name = "A";
+        if (m == 10) note_name = "A#";
+        if (m == 11) note_name = "B";
+        
+        tractCtx.fillText("transpose: " + note_name + octave, 280, 470);
+        /*
+        if (controller != null) {
+            var val = controller.buttons[0]
+            if (val.pressed) {
+                tractCtx.fillRect(0, 0, 100, 100);
+            }
+        }*/
+        
+        for (var i = 0; i < 10; i++) {
+            notchesCtx.fillRect(i * 30 + 10, 550, 5, 40)
+        }
+        
+        notchesCtx.font = "20px serif";
+        notchesCtx.fillText("e - octave up; r - octave down;", 10, 100);
+        notchesCtx.fillText("q - half step up; w - half step down;", 10, 200);
+        
         
         if (this.inAboutScreen) this.drawAboutScreen();
         else if (this.inInstructionsScreen) this.drawInstructionsScreen();
@@ -546,7 +645,8 @@ var UI =
 
 var delayTimeValue;
 var gainValue;
-  
+ 
+var max_delay = 0.25;
 
 var AudioSystem = 
 {   
@@ -588,7 +688,7 @@ var AudioSystem =
         whiteNoise.connect(fricativeFilter);
         fricativeFilter.connect(this.scriptProcessor);
         
-        var delayEffect = this.audioContext.createDelay(0.5);
+        var delayEffect = this.audioContext.createDelay(max_delay);
         delayEffect.delayTime.value = delay_time_amount;
         delayTimeValue = delayEffect.delayTime;
         this.scriptProcessor.connect(delayEffect);
@@ -688,7 +788,7 @@ var Glottis =
     keyboardHeight : 100,
     semitones : 20,
     marks : [0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0],
-    baseNote : 87.3071, //F
+    baseNote : 261.63, //C4
     
     init : function()
     {
@@ -810,7 +910,7 @@ var Glottis =
             var local_x = this.touch.x - this.keyboardLeft;
             local_y = Math.clamp(local_y, 0, this.keyboardHeight-26);
             var semitone = this.semitones * local_x / this.keyboardWidth + 0.5;
-            Glottis.UIFrequency = this.baseNote * Math.pow(2, semitone/12);
+            Glottis.UIFrequency = this.baseNote * Math.pow(2, (current_transpose - 60 + semitone - 1)/12);
             if (Glottis.intensity == 0) Glottis.smoothFrequency = Glottis.UIFrequency;
             //Glottis.UIRd = 3*local_y / (this.keyboardHeight-20);
             var t = Math.clamp(1-local_y / (this.keyboardHeight-28), 0, 1);
@@ -1641,6 +1741,21 @@ var TractUI =
         }
     },
     
+    move_tongue : function (x, y) {
+            var index = TractUI.getIndex(x,y);
+            var diameter = TractUI.getDiameter(x,y);
+            var fromPoint = (this.outerTongueControlRadius-diameter)/(this.outerTongueControlRadius-this.innerTongueControlRadius);
+            fromPoint = Math.clamp(fromPoint, 0, 1);
+            fromPoint = Math.pow(fromPoint, 0.58) - 0.2*(fromPoint*fromPoint-fromPoint); //horrible kludge to fit curve to straight line
+            this.tongueDiameter = Math.clamp(diameter, this.innerTongueControlRadius, this.outerTongueControlRadius);
+            //this.tongueIndex = Math.clamp(index, this.tongueLowerIndexBound, this.tongueUpperIndexBound);
+            var out = fromPoint*0.5*(this.tongueUpperIndexBound-this.tongueLowerIndexBound);
+            this.tongueIndex = Math.clamp(index, this.tongueIndexCentre-out, this.tongueIndexCentre+out);
+    
+        
+
+    },
+    
     handleTouches : function()
     {           
         if (this.tongueTouch != 0 && !this.tongueTouch.alive) this.tongueTouch = 0;
@@ -1666,17 +1781,7 @@ var TractUI =
         
         if (this.tongueTouch != 0)
         {
-            var x = this.tongueTouch.x;
-            var y = this.tongueTouch.y;        
-            var index = TractUI.getIndex(x,y);
-            var diameter = TractUI.getDiameter(x,y);
-            var fromPoint = (this.outerTongueControlRadius-diameter)/(this.outerTongueControlRadius-this.innerTongueControlRadius);
-            fromPoint = Math.clamp(fromPoint, 0, 1);
-            fromPoint = Math.pow(fromPoint, 0.58) - 0.2*(fromPoint*fromPoint-fromPoint); //horrible kludge to fit curve to straight line
-            this.tongueDiameter = Math.clamp(diameter, this.innerTongueControlRadius, this.outerTongueControlRadius);
-            //this.tongueIndex = Math.clamp(index, this.tongueLowerIndexBound, this.tongueUpperIndexBound);
-            var out = fromPoint*0.5*(this.tongueUpperIndexBound-this.tongueLowerIndexBound);
-            this.tongueIndex = Math.clamp(index, this.tongueIndexCentre-out, this.tongueIndexCentre+out);
+            this.move_tongue(this.tongueTouch.x, this.tongueTouch.y);
         }
         
         this.setRestDiameter();   
@@ -1773,6 +1878,11 @@ function makeButton(x, y, width, height, text, switchedOn)
         this.drawText(ctx);
     };
     
+    
+    button.toggle = function() {
+        this.switchedOn = !this.switchedOn;
+    }
+    
     button.drawText = function(ctx)
     {
         ctx.fillText(this.text, this.x+this.width/2, this.y+this.height/2+6);
@@ -1783,21 +1893,24 @@ function makeButton(x, y, width, height, text, switchedOn)
         if (touch.x>=this.x && touch.x <= this.x + this.width  
             && touch.y >= this.y && touch.y <= this.y + this.height)
         {
-            this.switchedOn = !this.switchedOn;
+            this.toggle();
         }
     };
     
     return button;
 }
     
-function makeMeter(x, y, width, height, value) {
+function makeMeter(x, y, width, height, value, min, max) {
 
     meter = {};
     meter.x = x;
     meter.y = y;
+    meter.min = min; 
+    meter.max = max;
     meter.width = width;
     meter.height = height;
     meter.value = value;
+    meter.internal_value = value;
     
     meter.draw = function(ctx)
     {
@@ -1822,8 +1935,8 @@ function makeMeter(x, y, width, height, value) {
         ctx.fillStyle = "orchid";
         
         ctx.beginPath();
-        ctx.moveTo(this.x, this.y + height * (1.0 - this.value));
-        ctx.lineTo(this.x+this.width, this.y + height * (1.0 - this.value));
+        ctx.moveTo(this.x, this.y + height * (1.0 - this.internal_value));
+        ctx.lineTo(this.x+this.width, this.y + height * (1.0 - this.internal_value));
         ctx.lineTo(this.x+this.width, this.y + this.height);
         ctx.lineTo(this.x, this.y + this.height);
         ctx.closePath();
@@ -1836,7 +1949,8 @@ function makeMeter(x, y, width, height, value) {
         if (touch.x>=this.x && touch.x <= this.x + this.width  
             && touch.y >= this.y && touch.y <= this.y + this.height)
         {
-            this.value = 1.0 - (touch.y - this.y) / this.height;
+            this.internal_value = (1.0 - (touch.y - this.y) / this.height);
+            this.value = this. internal_value * (this.max - this.min) + this.min;
         }
     };
     
