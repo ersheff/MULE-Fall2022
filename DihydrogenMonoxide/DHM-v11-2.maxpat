@@ -40,6 +40,20 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-124",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 1094.200000000000045, 1272.0, 93.0, 22.0 ],
+					"text" : "Water-v11-2.pdf"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-126",
 					"maxclass" : "comment",
 					"numinlets" : 1,
@@ -61,7 +75,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 996.200000000000045, 1272.0, 96.0, 22.0 ],
-					"presentation_linecount" : 2,
 					"text" : "Steam-v11-2.pdf"
 				}
 
@@ -89,7 +102,7 @@
 					"parameter_enable" : 1,
 					"patching_rect" : [ 912.0, 1211.0, 100.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 794.200000000000045, 10.0, 100.0, 22.0 ],
+					"presentation_rect" : [ 794.200000000000045, 10.0, 162.0, 22.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "- choose score page -", "Ice", "Steam", "Water" ],
@@ -116,7 +129,7 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 676.200000000000045, 42.0, 553.0, 749.5 ],
 					"rendermode" : 0,
-					"url" : "file://Steam-v11-2.pdf"
+					"url" : "file://Water-v11-2.pdf"
 				}
 
 			}
@@ -7910,8 +7923,22 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-124", 0 ],
+					"source" : [ "obj-122", 2 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-115", 0 ],
 					"source" : [ "obj-123", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-115", 0 ],
+					"source" : [ "obj-124", 0 ]
 				}
 
 			}
