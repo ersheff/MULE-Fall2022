@@ -106,7 +106,7 @@ var sampleRate;
 var time = 0;
 var temp = {a:0, b:0};
 var alwaysVoice = false;
-var autoWobble = true;
+var autoWobble = false;
 var noiseFreq = 500;
 var noiseQ = 0.7;
 var palePink = "#FFEEF5";
@@ -152,7 +152,7 @@ var UI =
         this.delayButton = makeButton(300, 395, 140, 30, "delay", false);
         this.gainMeter = makeMeter(460, 270, 10, 100, gain_amount, 0.0, 1.0);
         this.delayTimeMeter = makeMeter(490, 270, 10, 100, delay_time_amount, 0.0, max_delay);
-        this.autoWobbleButton = makeButton(460, 464, 140, 30, "pitch wobble", true); 
+        this.autoWobbleButton = makeButton(460, 464, 140, 30, "pitch wobble", false); 
 
         tractCanvas.addEventListener('touchstart', UI.startTouches);
         tractCanvas.addEventListener('touchmove', UI.moveTouches);
@@ -739,10 +739,7 @@ var AudioSystem =
             Tract.runStep(glottalOutput, inputArray2[j], lambda2);
             vocalOutput += Tract.lipOutput + Tract.noseOutput;
             var pregain = (0.5 + gain_amount * 4.0);
-            if (distortion) 
-                outArray[j] = Math.clamp(vocalOutput * pregain, -1.0, 1.0);
-            else 
-                outArray[j] = vocalOutput * 0.125;
+            outArray[j] = vocalOutput * 0.125;
         }
         Glottis.finishBlock();
         Tract.finishBlock();
