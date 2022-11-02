@@ -1,5 +1,13 @@
 {
-	"percussion" : {
+  "chimes" : {
+		"5": "samples-chimes-E5.mp3",
+    "6": "samples-chimes-D5.mp3",
+    "7": "samples-chimes-C5.mp3",
+    "8": "samples-chimes-B4.mp3",
+    "1": "samples-chimes-A4.mp3",
+    "2": "samples-chimes-E4.mp3"
+	},
+  "drums" : {
 		"5": "samples-percussion-kick.mp3",
     "6": "samples-percussion-tom.mp3",
     "7": "samples-percussion-hihat.mp3",
@@ -12,13 +20,5 @@
     "8": "samples-harp-Gs3.mp3",
     "1": "samples-harp-A4.mp3",
     "2": "samples-harp-Gs4.mp3"
-	},
-  "chimes" : {
-		"5": "samples-chimes-E5.mp3",
-    "6": "samples-chimes-D5.mp3",
-    "7": "samples-chimes-C5.mp3",
-    "8": "samples-chimes-B4.mp3",
-    "1": "samples-chimes-A4.mp3",
-    "2": "samples-chimes-E4.mp3"
 	}
 }
