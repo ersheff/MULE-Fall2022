@@ -118,6 +118,7 @@ var gain_amount = 0.5;
 var delay_time_amount = 0.1;
 
 var distortion = false;
+var distortion_last_frame = distortion;
     
 var current_transpose = 60 - 12 - 7;
     
@@ -191,6 +192,8 @@ var UI =
             id = 13; 
         if (id == 0)
             id = 10;
+        if (event.code == "Backquote")
+            id = 0;
         
         if (event.code == "KeyA") {
             TractUI.move_tongue(200, 370);
@@ -210,6 +213,18 @@ var UI =
             current_transpose_translate(-12);
         }
         
+        if (event.code == "ArrowUp") {
+            Glottis.y = Glottis.keyboardTop + 10;
+            Glottis.UITenseness = 1.0;
+        }
+        if (event.code == "ArrowDown") {
+            Glottis.y = Glottis.keyboardTop + Glottis.keyboardHeight - 10;
+            Glottis.UITenseness = 0.0;
+        }
+        if (event.code == "ArrowUp" || event.code == "ArrowDown") {
+            Glottis.loudness = Math.pow(Glottis.UITenseness, 0.25);
+        }
+        
         
         
         if (event.code == "KeyO") {
@@ -218,7 +233,7 @@ var UI =
             
         }
         
-        if(id >= 1 && id <= 13) {
+        if(id >= 0 && id <= 13) {
             Glottis.UIFrequency = (261.63) * Math.pow(2.0, (current_transpose - 60 + id - 1) / 12.0);
             Glottis.isTouched = true;
         }
@@ -234,7 +249,10 @@ var UI =
             id = 13; 
         if (id == 0)
             id = 10;
-        if(id >= 1 && id <= 13) {
+        if (event.code == "Backquote")
+            id = 0;
+        
+        if(id >= 0 && id <= 13) {
                 Glottis.isTouched = false;
         }
         
@@ -296,7 +314,8 @@ var UI =
         
         notchesCtx.font = "20px serif";
         notchesCtx.fillText("e - octave up; r - octave down;", 10, 100);
-        notchesCtx.fillText("q - half step up; w - half step down;", 10, 200);
+        //notchesCtx.fillText("q - half step up; w - half step down;", 10, 200);
+        notchesCtx.fillText("arrow up - voice; arrow down - breath;", 10, 200);
         
         
         if (this.inAboutScreen) this.drawAboutScreen();
@@ -433,10 +452,23 @@ var UI =
     
         this.delayButton.handleTouchStart(touch);
         
+        djentValue.value = this.gainMeter.value * 50.0;
+            
+        if (distortion != distortion_last_frame) {
+            AudioSystem.scriptProcessor.disconnect();
+            if (distortion) {
+                AudioSystem.scriptProcessor.connect(AudioSystem.djent);
+            } else {
+                AudioSystem.scriptProcessor.connect(AudioSystem.delayEffect);
+            }
+            distortion_last_frame = distortion;
+        }
+        
         if (this.delayButton.switchedOn) {
             gainValue.value = 0.75;
             delayTimeValue.value = delay_time_amount;    
         } else {
+            // TODO: gainValue.value = 0; was here before so replace that with something
             gainValue.value = 0;
             delayTimeValue.value = 0;
         }
@@ -645,6 +677,7 @@ var UI =
 
 var delayTimeValue;
 var gainValue;
+var djentValue;
  
 var max_delay = 0.25;
 
@@ -688,17 +721,57 @@ var AudioSystem =
         whiteNoise.connect(fricativeFilter);
         fricativeFilter.connect(this.scriptProcessor);
         
-        var delayEffect = this.audioContext.createDelay(max_delay);
-        delayEffect.delayTime.value = delay_time_amount;
-        delayTimeValue = delayEffect.delayTime;
-        this.scriptProcessor.connect(delayEffect);
-        delayEffect.connect(this.audioContext.destination);
+        
+        this.djent = this.audioContext.createGain();
+        this.djent.gain.value = 50.00;
+        djentValue = this.djent.gain;
+      /*  
+        function makeDistortionCurve(amount) {
+          const k = typeof amount === "number" ? amount : 50;
+          const n_samples = 44100;
+          const curve = new Float32Array(n_samples);
+          const deg = Math.PI / 180;
+
+          for (let i = 0; i < n_samples; i++) {
+            const x = (i * 2) / n_samples - 1;
+            curve[i] = ((3 + k) * x * 20 * deg) / (Math.PI + k * Math.abs(x));
+          }
+          return curve;
+        }
+      */  
+
+        function makeDistortionCurve(amount) {
+          const n_samples = 44100;
+          const curve = new Float32Array(n_samples);
+          const deg = Math.PI / 180;
+
+          for (let i = 0; i < n_samples; i++) {
+            const x = (i * 2) / n_samples - 1;
+            curve[i] = Math.abs(x) > 0.1 ? 0.1 * (x > 0.0 ? 1.0 : -1.0) : x;
+          }
+          return curve;
+        }
+          
+        const distortion = this.audioContext.createWaveShaper();
+        distortion.curve = makeDistortionCurve(10);
+        
+        this.delayEffect = this.audioContext.createDelay(max_delay);
+        this.delayEffect.delayTime.value = delay_time_amount;
+        delayTimeValue = this.delayEffect.delayTime;
+        
+        this.djent.connect(this.delayEffect);
+        
+        
+        this.scriptProcessor.connect(this.delayEffect);
+                
+        
+        this.delayEffect.connect(this.audioContext.destination);
         
         var feedback = this.audioContext.createGain();
         feedback.gain.value = 0.75;
         gainValue = feedback.gain;
-        feedback.connect(delayEffect);
-        delayEffect.connect(feedback);
+        feedback.connect(this.delayEffect);
+        this.delayEffect.connect(feedback);
         
         whiteNoise.start(0);
     },
@@ -738,7 +811,6 @@ var AudioSystem =
             vocalOutput += Tract.lipOutput + Tract.noseOutput;
             Tract.runStep(glottalOutput, inputArray2[j], lambda2);
             vocalOutput += Tract.lipOutput + Tract.noseOutput;
-            var pregain = (0.5 + gain_amount * 4.0);
             outArray[j] = vocalOutput * 0.125;
         }
         Glottis.finishBlock();
