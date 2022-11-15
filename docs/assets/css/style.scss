@@ -3,10 +3,10 @@
 
 @import "{{ site.theme }}";
 
-header > a {
+a.btn {
   display: none;
 }
 
-h1 {
+h1, h2 {
   color: #C3142D;
 }
