@@ -43,6 +43,8 @@ Inspired by Megan’s affection for the spooky Halloween aesthetic, *Ghost Range
 
 "The 'QWOP' of speaking." - Digg  
 
-<img src="pt-screenshot.png" width="80%">
+<div style="display: flex; justify-content: center;">
+  <img src="pt-screenshot.png" width="80%">
+</div>
 
 While the Pink Trombone website is intended as more of an interactive educational experience than an instrument, *Songs for Pink Trombone* is MULE's execution of a common practice in music technology - exploring the musical affordances of "non-musical" devices and applications and repurposing them in a musical context.
