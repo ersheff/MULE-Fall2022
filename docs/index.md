@@ -15,7 +15,7 @@ A pizza-themed piece for piano and large electronic ensemble.
 ---
 
 ## Gabberwonky - Ian Dilenschneider
-*Gabberwonky* is a soundscape composition for the [Gibber](https://gibber.cc) coding language. Utilizing the collaborative "Gabber" feature, many ensemble members are able to live-code in the same environment and execute and run code together. The composition sweeps through rhythmic patterns as different samples are triggered at gradually ascending tempos until they fall into place together.
+*Gabberwonky* is a soundscape composition for the [Gibber](https://gibber.cc) coding language. Utilizing the collaborative "Gabber" feature, multiple ensemble members are able to live-code in the same environment and execute and run code together. The composition sweeps through rhythmic patterns as different samples are triggered at gradually ascending tempos until they fall into place together.
 
 **Ian Dilenschneider** is a music technology major at Miami University.
 
@@ -26,7 +26,7 @@ A pizza-themed piece for piano and large electronic ensemble.
 2. Water
 3. Ice
 
-*Dihydrogen Monoxide* began with a prompt - find or record audio samples that abstractly represent the 3 phases of matter: gas, liquid, and solid. Using a custom digital instrument developed in Max to slice and loop sections of sound, the members of the ensemble explored the different textures, timbres, and internal rhythms of their various samples. The three movements of this piece were composed collaboratively, reflecting on the results after each rehearsal and gradually developing a score that gave structure to the performance while still allowing for individual interpretation and preference for different source material.
+*Dihydrogen Monoxide* began with a prompt - find or record audio samples that abstractly represent the 3 phases of matter: gas, liquid, and solid. Using a custom digital instrument developed in Max to slice and loop sections of sound, the members of the ensemble explored the different textures, timbres, and internal rhythms of their various samples. The three movements of this piece were composed collaboratively, reflecting on the results after each rehearsal and gradually developing a score that gave structure to the performance while still allowing for individual interpretation and preference for different source materials.
 
 ---
 
