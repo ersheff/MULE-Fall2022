@@ -5,7 +5,9 @@ description: Wednesday, November 16, 2022, 7:30 PM - Souers Recital Hall
 
 ---
 
-# Program Notes
+<div style="display: flex; justify-content: center;">
+  <h1>Program Notes</h1>
+</div>
 
 <div style="display: flex; justify-content: center; align-items: center; gap: 1ch;">
   <img src="MUCaT-F22-logo-FINAL.png" width="100px">
