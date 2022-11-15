@@ -3,6 +3,11 @@
 
 @import "{{ site.theme }}";
 
+.page-header {
+  background-color: #C3142D;
+  background-image: none;
+}
+
 a.btn {
   display: none;
 }
