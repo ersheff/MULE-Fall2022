@@ -10,7 +10,9 @@ description: Wednesday, November 16, 2022, 7:30 PM - Souers Recital Hall
 ## Dubious Toppings - Joo Won Park
 A pizza-themed piece for piano and large electronic ensemble.
 
-**Joo Won Park** ([joowonpark.net](https://joowonpark.net)) makes music with electronics, toys, and other sources that he can record or synthesize.   He is the recipient of Knight Arts Challenge Detroit (2019) and the Kresge Arts Fellowship (2020).  His music and writings are available on ICMC DVD, Spectrum Press, MIT Press, PARMA, Visceral Media, MCSD, SEAMUS, and No Remixes labels. He currently teaches Music Technology at Wayne State University.
+**Joo Won Park** ([joowonpark.net](https://joowonpark.net)) makes music with electronics, toys, and other sources that he can record or synthesize.   He is the recipient of Knight Arts Challenge Detroit (2019) and the Kresge Arts Fellowship (2020).  His music and writings are available on ICMC DVD, Spectrum Press, MIT Press, PARMA, Visceral Media, MCSD, SEAMUS, and No Remixes labels. He currently teaches Music Technology at Wayne State University.  
+
+*Special thanks to Heather Merhout for playing piano with MULE on this concert.* 
 
 ---
 
@@ -37,7 +39,7 @@ Inspired by Megan’s affection for the spooky Halloween aesthetic, *Ghost Range
 
 ---
 
-## Songs for Pink Trombone
+## Songs for Pink Trombone - MULE
 1. Wub Wub
 2. Omari
 3. Incognito
@@ -50,4 +52,6 @@ Inspired by Megan’s affection for the spooky Halloween aesthetic, *Ghost Range
   <img src="pt-screenshot.png" width="80%">
 </div>
 
-While the Pink Trombone website is intended as more of an interactive educational experience than an instrument, *Songs for Pink Trombone* is MULE's execution of a common practice in music technology - exploring the musical affordances of "non-musical" devices and applications and repurposing them in a musical context.
+While the Pink Trombone website is intended as more of an interactive educational experience than an instrument, *Songs for Pink Trombone* is MULE's execution of a common practice in music technology - exploring the musical affordances of "non-musical" devices and applications and repurposing them in a musical context.  
+
+*Special thanks to Bennett Meacham for custom modifications to the Pink Trombone source code.* 
