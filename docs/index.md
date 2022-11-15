@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Miami University Laptop Ensemble (MULE)
-description: Wednesday, November 16, 2021, 7:30 PM - Souers Recital Hall
+description: Wednesday, November 16, 2022, 7:30 PM - Souers Recital Hall
 
 ---
 
@@ -33,7 +33,7 @@ A pizza-themed piece for piano and large electronic ensemble.
 ## Ghost Ranger - Megan Haarlammert
 Inspired by Megan’s affection for the spooky Halloween aesthetic, *Ghost Ranger* is a piece for assorted game controllers and MIDI devices that involves playing traditional music in a non-traditional way. Even though we are well into November, we hope you enjoy this spooky little tune with a touch of Wild West.
 
-**Megan** is a sophomore music technology major and music composition minor from Cincinnati, Ohio. As a competitive ballroom dancer and gymnastics choreographer, as well as a music student, she enjoys writing music, playing music, and curating performances to music. Megan extends her gratitude to members of this ensemble and to the audience for the opportunity to present *Ghost Ranger*.
+**Megan Haarlammert** is a sophomore music technology major and music composition minor from Cincinnati, Ohio. As a competitive ballroom dancer and gymnastics choreographer, as well as a music student, she enjoys writing music, playing music, and curating performances to music. Megan extends her gratitude to members of this ensemble and to the audience for the opportunity to present *Ghost Ranger*.
 
 ---
 
