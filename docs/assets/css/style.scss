@@ -1,0 +1,12 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+header > a {
+  display: none;
+}
+
+h1 {
+  color: #C3142D;
+}
