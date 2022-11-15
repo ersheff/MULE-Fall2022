@@ -54,4 +54,4 @@ Inspired by Megan’s affection for the spooky Halloween aesthetic, *Ghost Range
 
 While the Pink Trombone website is intended as more of an interactive educational experience than an instrument, *Songs for Pink Trombone* is MULE's execution of a common practice in music technology - exploring the musical affordances of "non-musical" devices and applications and repurposing them in a musical context.  
 
-*Special thanks to Bennett Meacham for custom modifications to the Pink Trombone source code.* 
+*Special thanks to Bennett Meacham for custom modifications to the Pink Trombone source code.*
