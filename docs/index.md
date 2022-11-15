@@ -9,7 +9,7 @@ description: Wednesday, November 16, 2022, 7:30 PM - Souers Recital Hall
 
 <div style="display: flex; justify-content: center; align-items: center; gap: 1ch;">
   <img src="MUCaT-F22-logo-FINAL.png" width="100px">
-  <p>Presented by Miami University Composition and Technology</p>
+  <p>Miami University Composition and Technology</p>
 </div>
 
 ---
