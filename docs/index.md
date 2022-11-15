@@ -7,10 +7,12 @@ description: Wednesday, November 16, 2022, 7:30 PM - Souers Recital Hall
 
 # Program Notes
 
-<div style="display: flex; justify-content: center; align-items: center; gap: 10ch;">
-  <p>Presented by Miami University Composition and Technology</p>
+<div style="display: flex; align-items: center; gap: 1ch;">
   <img src="MUCaT-F22-logo-FINAL.png" width="100px">
+  <p>Presented by Miami University Composition and Technology</p>
 </div>
+
+---
 
 ## Dubious Toppings - Joo Won Park
 A pizza-themed piece for piano and large electronic ensemble.
